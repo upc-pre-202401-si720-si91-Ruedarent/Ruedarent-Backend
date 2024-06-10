@@ -3,6 +3,11 @@ using RuedarentApi.Shared.Domain.Repositories;
 using RuedarentApi.Shared.Infraestructure.Interfaces.ASP.Configuratin;
 using RuedarentApi.Shared.Infraestructure.Persistences.EFC.Configuration;
 using RuedarentApi.Shared.Infraestructure.Persistences.EFC.Repositories;
+using RuedarentApi.UserProfile.Application.Internal.CommandService;
+using RuedarentApi.UserProfile.Application.Internal.QueryService;
+using RuedarentApi.UserProfile.Domain.Repositories;
+using RuedarentApi.UserProfile.Domain.Services;
+using RuedarentApi.UserProfile.Infraestructure.Repositories;
 using RuedarentApi.Vehicle.Application.Internal.CommandService;
 using RuedarentApi.Vehicle.Application.Internal.QueryService;
 using RuedarentApi.Vehicle.Domain.Repositories;
@@ -52,6 +57,10 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IVehicleSourceRepository, VehicleSourceRepository>();
 builder.Services.AddScoped<IVehicleSourceCommandService, VehicleSourceCommandService>();
 builder.Services.AddScoped<IVehicleSourceQueryService, VehicleSourceQueryService>();
+//USER
+builder.Services.AddScoped<IUserSourceRepository, UserSourceRepository>();
+builder.Services.AddScoped<IUserSourceCommandService, UserSourceCommandService>();
+builder.Services.AddScoped<IUserSourceQueryService, UserSourceQueryService>();
 //agregar cada entidad y arquetipo
 
 var app = builder.Build();
