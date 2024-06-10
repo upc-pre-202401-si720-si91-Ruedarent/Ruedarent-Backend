@@ -49,9 +49,9 @@ builder.Services.AddControllers(options =>
 });
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-builder.Services.AddScoped<IFavoriteSourceRepository, FavoriteSourceRepository>();
-builder.Services.AddScoped<IFavoriteSourceCommandService, FavoriteSourceCommandService>();
-builder.Services.AddScoped<IFavoriteSourceQueryService, FavoriteSourceQueryService>();
+builder.Services.AddScoped<IVehicleSourceRepository, VehicleSourceRepository>();
+builder.Services.AddScoped<IVehicleSourceCommandService, VehicleSourceCommandService>();
+builder.Services.AddScoped<IVehicleSourceQueryService, VehicleSourceQueryService>();
 //agregar cada entidad y arquetipo
 
 var app = builder.Build();

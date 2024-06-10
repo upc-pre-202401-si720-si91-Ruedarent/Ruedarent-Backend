@@ -22,14 +22,14 @@ public class AppDBContext : DbContext
     {
         base.OnModelCreating(builder);
         
-        builder.Entity<FavoriteSource>().ToTable("FavoriteSource");
-        builder.Entity<FavoriteSource>().HasKey(f => f.Id);
-        builder.Entity<FavoriteSource>().Property(f => f.Id).IsRequired().ValueGeneratedOnAdd();
-        builder.Entity<FavoriteSource>().Property(f => f.VehiclesApiKey).IsRequired();
-        builder.Entity<FavoriteSource>().Property(f => f.SourceId).IsRequired();
-        builder.Entity<FavoriteSource>().Property(f => f.VehicleName).IsRequired();
-        builder.Entity<FavoriteSource>().Property(f => f.VehicleType).IsRequired();
-        builder.Entity<FavoriteSource>().Property(f => f.VehicleUserId).IsRequired();
+        builder.Entity<VehicleSource>().ToTable("FavoriteSource");
+        builder.Entity<VehicleSource>().HasKey(f => f.Id);
+        builder.Entity<VehicleSource>().Property(f => f.Id).IsRequired().ValueGeneratedOnAdd();
+        builder.Entity<VehicleSource>().Property(f => f.VehiclesApiKey).IsRequired();
+        builder.Entity<VehicleSource>().Property(f => f.SourceId).IsRequired();
+        builder.Entity<VehicleSource>().Property(f => f.VehicleName).IsRequired();
+        builder.Entity<VehicleSource>().Property(f => f.VehicleType).IsRequired();
+        builder.Entity<VehicleSource>().Property(f => f.VehicleUserId).IsRequired();
 //falta agregar los de vehiculos, sus datos y sus relaciones
         builder.UseSnakeCaseNamingConvention();
     }

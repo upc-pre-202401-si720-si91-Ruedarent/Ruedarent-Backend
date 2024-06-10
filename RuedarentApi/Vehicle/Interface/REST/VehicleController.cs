@@ -14,23 +14,23 @@ namespace RuedarentApi.Vehicle.Interface.REST;
 [ApiController]
 [Route("api/v1/[controller]")]
 [Produces(MediaTypeNames.Application.Json)]
-public class VehicleController(IFavoriteSourceRepository favoriteSourceRepository,IFavoriteSourceCommandService favoriteSourceCommandService, IFavoriteSourceQueryService favoriteSourceQueryService) : ControllerBase
+public class VehicleController(IVehicleSourceRepository vehicleSourceRepository,IVehicleSourceCommandService vehicleSourceCommandService, IVehicleSourceQueryService vehicleSourceQueryService) : ControllerBase
 {
     [HttpPost]
-    public async Task<ActionResult> CreateFavoriteSource([FromBody] CreateFavoriteSourceResource resource)
+    public async Task<ActionResult> CreateFavoriteSource([FromBody] CreateVehicleSourceResource resource)
     {
         var createFavoriteSourceCommand =
-            CreateFavoriteSourceCommandFromResourceAssembler.ToCommandFromResource(resource);
-        var result = await favoriteSourceCommandService.Handle(createFavoriteSourceCommand);
+            CreateVehicleSourceCommandFromResourceAssembler.ToCommandFromResource(resource);
+        var result = await vehicleSourceCommandService.Handle(createFavoriteSourceCommand);
         return CreatedAtAction(nameof(GetFavoriteSourceById), new { id = result.Id },
-            FavoriteSourceResourceFromEntityAssembler.toResourceFromEntity(result));
+            VehicleSourceResourceFromEntityAssembler.toResourceFromEntity(result));
     }
 
     private async Task<ActionResult> GetFavoriteSourcesByVehicleApiKey(string vehicleApiKey)
     {
-        var getFavoriteSourcesByVehicleApiKeyQuery = new GetFavoriteSourceByVehicleApiKeyQuery(vehicleApiKey);
-        var result = await favoriteSourceQueryService.Handle(getFavoriteSourcesByVehicleApiKeyQuery);
-        var resources = result.Select(FavoriteSourceResourceFromEntityAssembler.toResourceFromEntity);
+        var getFavoriteSourcesByVehicleApiKeyQuery = new GetVehicleSourceByVehicleApiKeyQuery(vehicleApiKey);
+        var result = await vehicleSourceQueryService.Handle(getFavoriteSourcesByVehicleApiKeyQuery);
+        var resources = result.Select(VehicleSourceResourceFromEntityAssembler.toResourceFromEntity);
         return Ok(resources);
     }
 
@@ -38,20 +38,20 @@ public class VehicleController(IFavoriteSourceRepository favoriteSourceRepositor
         string sourceId)
     {
         var getFavoriteSourceByVehiclesApiKeyAndSourceIdQuery =
-            new GetFavoriteSourceByVehicleApiKeyANDSourceIdQuery(vehiclesApiKey, sourceId);
-        var result = await favoriteSourceQueryService.Handle(getFavoriteSourceByVehiclesApiKeyAndSourceIdQuery);
+            new GetVehicleSourceByVehicleApiKeyANDSourceIdQuery(vehiclesApiKey, sourceId);
+        var result = await vehicleSourceQueryService.Handle(getFavoriteSourceByVehiclesApiKeyAndSourceIdQuery);
         if (result is null) return NotFound();
-        var resource = FavoriteSourceResourceFromEntityAssembler.toResourceFromEntity(result);
+        var resource = VehicleSourceResourceFromEntityAssembler.toResourceFromEntity(result);
         return Ok(resource);
     }
 
     [HttpGet("{id}")]
     public async Task<ActionResult> GetFavoriteSourceById(int id)
     {
-        var getFavoriteSourceByIdQuery = new GetFavoriteSourceByIdQuery(id);
-        var result = await favoriteSourceQueryService.Handle(getFavoriteSourceByIdQuery);
+        var getFavoriteSourceByIdQuery = new GetVehicleSourceByIdQuery(id);
+        var result = await vehicleSourceQueryService.Handle(getFavoriteSourceByIdQuery);
         if (result is null) return NotFound();
-        var resource = FavoriteSourceResourceFromEntityAssembler.toResourceFromEntity(result);
+        var resource = VehicleSourceResourceFromEntityAssembler.toResourceFromEntity(result);
         return Ok(resource);
     }
 
@@ -67,22 +67,22 @@ public class VehicleController(IFavoriteSourceRepository favoriteSourceRepositor
     [HttpDelete("{id}")]
     public async Task<ActionResult> DeleteFavoriteSource(int id)
     {
-        var favoritesource = await favoriteSourceRepository.FindByIdAsync(id);
+        var favoritesource = await vehicleSourceRepository.FindByIdAsync(id);
         if (favoritesource == null) 
         {
             return NotFound();
         }
 
-        await favoriteSourceRepository.DeleteFavoriteSourceAsync(favoritesource);
+        await vehicleSourceRepository.DeleteFavoriteSourceAsync(favoritesource);
 
         return NoContent();
 
     }
 
     [HttpGet("user/{vehicleUserId}")]
-    public async Task<ActionResult<IEnumerable<FavoriteSource>>> GetFavoriteSourceByVehicleUserId(int vehicleUserId)
+    public async Task<ActionResult<IEnumerable<VehicleSource>>> GetFavoriteSourceByVehicleUserId(int vehicleUserId)
     {
-        var favoritesource = await favoriteSourceRepository.FindByVehicleUserIdAsync(vehicleUserId);
+        var favoritesource = await vehicleSourceRepository.FindByVehicleUserIdAsync(vehicleUserId);
         return Ok(favoritesource);
     }
 }

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("RuedarentApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+73fd842b8c05b11ed366a61c7ce56c3273517f49")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f043c68cb9de378f6f6ba7f34c7056cd608201b0")]
 [assembly: System.Reflection.AssemblyProductAttribute("RuedarentApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("RuedarentApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

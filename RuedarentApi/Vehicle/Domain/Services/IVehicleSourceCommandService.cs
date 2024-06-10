@@ -3,7 +3,7 @@ using RuedarentApi.Vehicle.Domain.Model.Commands;
 
 namespace RuedarentApi.Vehicle.Domain.Services;
 
-public interface IFavoriteSourceCommandService
+public interface IVehicleSourceCommandService
 {
-    Task<FavoriteSource> Handle(CreateFavoriteSourceCommand command);
+    Task<VehicleSource> Handle(CreateVehicleSourceCommand command);
 }

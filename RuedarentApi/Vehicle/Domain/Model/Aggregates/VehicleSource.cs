@@ -8,7 +8,7 @@ namespace RuedarentApi.Vehicle.Domain.Model.Aggregates;
 /// It is used to store the favorite source of a user.
 /// </summary>
 
-public class FavoriteSource
+public class VehicleSource
 {
     public int Id { get; private set; }
     public string VehiclesApiKey { get; private set; }
@@ -22,7 +22,7 @@ public class FavoriteSource
     
     
 
-    protected FavoriteSource()
+    protected VehicleSource()
     {
         this.VehiclesApiKey = string.Empty;
         this.SourceId = string.Empty;
@@ -37,7 +37,7 @@ public class FavoriteSource
     /// <remarks>the constructor is the command handler for the createfavoritesourcecommand</remarks>
     /// <param name="command"></param>
 
-    public FavoriteSource(CreateFavoriteSourceCommand command)
+    public VehicleSource(CreateVehicleSourceCommand command)
     {
         this.VehiclesApiKey = command.VehicleApiKey;
         this.SourceId = command.SourceId;
