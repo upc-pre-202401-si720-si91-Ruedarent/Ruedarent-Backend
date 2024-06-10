@@ -8,7 +8,7 @@ namespace RuedarentApi.Vehicle.Infraestructure.Repositories;
 
 public class VehicleSourceRepository : BaseRepository<VehicleSource>, IVehicleSourceRepository
 {
-    public VehicleSourceRepository(AppDBContext context) : base(context)
+    public VehicleSourceRepository(AppDbContext context) : base(context)
     {
         
     }

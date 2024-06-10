@@ -1,14 +1,15 @@
 ﻿using EntityFrameworkCore.CreatedUpdatedDate.Extensions;
 using Microsoft.EntityFrameworkCore;
+using RuedarentApi.Orders.Domain.Model.Aggregates;
 using RuedarentApi.Shared.Infraestructure.Persistences.EFC.Configuration.Extensions;
 using RuedarentApi.UserProfile.Domain.Model.Aggregates;
 using RuedarentApi.Vehicle.Domain.Model.Aggregates;
 
 namespace RuedarentApi.Shared.Infraestructure.Persistences.EFC.Configuration;
 
-public class AppDBContext : DbContext
+public class AppDbContext : DbContext
 {
-    public AppDBContext(DbContextOptions options) : base(options)
+    public AppDbContext(DbContextOptions options) : base(options)
     {
         
     }
@@ -45,7 +46,18 @@ public class AppDBContext : DbContext
         builder.Entity<UserSource>().Property(f => f.Country).IsRequired();
         builder.Entity<UserSource>().Property(f => f.UserId).IsRequired();
         builder.Entity<UserSource>().Property(f => f.Dni).IsRequired();
-     
+        
+        //order
+        builder.Entity<Order>().ToTable("Orders");
+        builder.Entity<Order>().HasKey(o => o.Id);
+        builder.Entity<Order>().Property(o => o.Id).IsRequired().ValueGeneratedOnAdd();
+        builder.Entity<Order>().Property(o => o.OwnerName).IsRequired().HasMaxLength(30);
+        builder.Entity<Order>().Property(o => o.SelectedPlan).IsRequired().HasMaxLength(10);
+        builder.Entity<Order>().Property(o => o.Discount).HasDefaultValue(0);
+        builder.Entity<Order>().Property(o => o.Subtotal).IsRequired().HasDefaultValue(0);
+        builder.Entity<Order>().Property(o => o.Total).IsRequired().HasComputedColumnSql("(`Subtotal` - `Discount`)");
+        builder.UseSnakeCaseNamingConvention();
+        
         
 
         builder.UseSnakeCaseNamingConvention();

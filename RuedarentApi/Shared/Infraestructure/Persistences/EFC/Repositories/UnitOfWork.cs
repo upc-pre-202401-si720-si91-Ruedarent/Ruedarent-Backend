@@ -5,9 +5,9 @@ namespace RuedarentApi.Shared.Infraestructure.Persistences.EFC.Repositories;
 
 public class UnitOfWork : IUnitOfWork
 {
-    private readonly AppDBContext _context;
+    private readonly AppDbContext _context;
 
-    public UnitOfWork(AppDBContext context)
+    public UnitOfWork(AppDbContext context)
     {
         _context = context;
     }

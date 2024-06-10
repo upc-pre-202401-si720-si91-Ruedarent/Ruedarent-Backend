@@ -6832,24 +6832,26 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\david\\.nuget\\packages\\": {}
+    "C:\\Users\\Usuario\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\david\\Documents\\GitHub\\Ruedarent-Backend\\RuedarentApi\\RuedarentApi.csproj",
+      "projectUniqueName": "D:\\Universidad\\ciclo 5\\aplicaciones web\\trabajo_equipo\\Ruedarent_Backend\\RuedarentApi\\RuedarentApi.csproj",
       "projectName": "RuedarentApi",
-      "projectPath": "C:\\Users\\david\\Documents\\GitHub\\Ruedarent-Backend\\RuedarentApi\\RuedarentApi.csproj",
-      "packagesPath": "C:\\Users\\david\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\david\\Documents\\GitHub\\Ruedarent-Backend\\RuedarentApi\\obj\\",
+      "projectPath": "D:\\Universidad\\ciclo 5\\aplicaciones web\\trabajo_equipo\\Ruedarent_Backend\\RuedarentApi\\RuedarentApi.csproj",
+      "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
+      "outputPath": "D:\\Universidad\\ciclo 5\\aplicaciones web\\trabajo_equipo\\Ruedarent_Backend\\RuedarentApi\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\david\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\Usuario\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {

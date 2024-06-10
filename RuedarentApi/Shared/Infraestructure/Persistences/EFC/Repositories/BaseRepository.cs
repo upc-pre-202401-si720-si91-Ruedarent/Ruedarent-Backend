@@ -6,9 +6,9 @@ namespace RuedarentApi.Shared.Infraestructure.Persistences.EFC.Repositories;
 
 public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : class
 {
-    protected readonly AppDBContext Context;
+    protected readonly AppDbContext Context;
 
-    protected BaseRepository(AppDBContext context)
+    protected BaseRepository(AppDbContext context)
     {
         Context = context;
     }

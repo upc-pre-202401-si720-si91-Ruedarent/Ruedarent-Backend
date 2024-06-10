@@ -8,7 +8,7 @@ namespace RuedarentApi.UserProfile.Infraestructure.Repositories;
 
 public class UserSourceRepository : BaseRepository<UserSource>, IUserSourceRepository
 {
-    public UserSourceRepository(AppDBContext context) : base(context)
+    public UserSourceRepository(AppDbContext context) : base(context)
     {
         
     }
