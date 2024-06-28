@@ -13,6 +13,11 @@ using RuedarentApi.Vehicle.Application.Internal.QueryService;
 using RuedarentApi.Vehicle.Domain.Repositories;
 using RuedarentApi.Vehicle.Domain.Services;
 using RuedarentApi.Vehicle.Infraestructure.Repositories;
+using RuedarentApi.Payment.Application.Internal.CommandServices;
+using RuedarentApi.Payment.Application.Internal.QueryServices;
+using RuedarentApi.Payment.Domain.Repositories;
+using RuedarentApi.Payment.Domain.Services;
+using RuedarentApi.Payment.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
