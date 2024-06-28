@@ -6832,19 +6832,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Usuario\\.nuget\\packages\\": {}
+    "C:\\Users\\onegl\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Universidad\\ciclo 5\\aplicaciones web\\trabajo_equipo\\Ruedarent_Backend\\RuedarentApi\\RuedarentApi.csproj",
+      "projectUniqueName": "C:\\Users\\onegl\\RiderProjects\\Ruedarent-Backend\\RuedarentApi\\RuedarentApi.csproj",
       "projectName": "RuedarentApi",
-      "projectPath": "D:\\Universidad\\ciclo 5\\aplicaciones web\\trabajo_equipo\\Ruedarent_Backend\\RuedarentApi\\RuedarentApi.csproj",
-      "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
-      "outputPath": "D:\\Universidad\\ciclo 5\\aplicaciones web\\trabajo_equipo\\Ruedarent_Backend\\RuedarentApi\\obj\\",
+      "projectPath": "C:\\Users\\onegl\\RiderProjects\\Ruedarent-Backend\\RuedarentApi\\RuedarentApi.csproj",
+      "packagesPath": "C:\\Users\\onegl\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\onegl\\RiderProjects\\Ruedarent-Backend\\RuedarentApi\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Usuario\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\onegl\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -6918,7 +6918,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.301/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.206/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

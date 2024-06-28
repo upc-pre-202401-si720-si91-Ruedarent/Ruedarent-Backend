@@ -9,7 +9,7 @@ namespace RuedarentApi.Shared.Infraestructure.Persistences.EFC.Configuration;
 
 public class AppDbContext : DbContext
 {
-    public AppDbContext(DbContextOptions options) : base(options)
+    public AppDbContext(DbContextOptions<AppDbContext> options): base(options)
     {
         
     }
@@ -19,7 +19,6 @@ public class AppDbContext : DbContext
         builder.AddCreatedUpdatedInterceptor();
         base.OnConfiguring(builder);
     }
-
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
@@ -32,7 +31,7 @@ public class AppDbContext : DbContext
         builder.Entity<VehicleSource>().Property(f => f.VehicleName).IsRequired();
         builder.Entity<VehicleSource>().Property(f => f.VehicleType).IsRequired();
         builder.Entity<VehicleSource>().Property(f => f.VehicleUserId).IsRequired();
-//falta agregar los de vehiculos, sus datos y sus relaciones
+
         builder.Entity<UserSource>().ToTable("UserSource");
         builder.Entity<UserSource>().HasKey(f => f.Id);
         builder.Entity<UserSource>().Property(f => f.Id).IsRequired().ValueGeneratedOnAdd();
@@ -47,7 +46,6 @@ public class AppDbContext : DbContext
         builder.Entity<UserSource>().Property(f => f.UserId).IsRequired();
         builder.Entity<UserSource>().Property(f => f.Dni).IsRequired();
         
-        //order
         builder.Entity<Order>().ToTable("Orders");
         builder.Entity<Order>().HasKey(o => o.Id);
         builder.Entity<Order>().Property(o => o.Id).IsRequired().ValueGeneratedOnAdd();
@@ -57,9 +55,6 @@ public class AppDbContext : DbContext
         builder.Entity<Order>().Property(o => o.Subtotal).IsRequired().HasDefaultValue(0);
         builder.Entity<Order>().Property(o => o.Total).IsRequired().HasComputedColumnSql("(`Subtotal` - `Discount`)");
         builder.UseSnakeCaseNamingConvention();
-        
-        
-
         builder.UseSnakeCaseNamingConvention();
     }
 }

@@ -18,6 +18,12 @@ using RuedarentApi.Vehicle.Application.Internal.QueryService;
 using RuedarentApi.Vehicle.Domain.Repositories;
 using RuedarentApi.Vehicle.Domain.Services;
 using RuedarentApi.Vehicle.Infraestructure.Repositories;
+using RuedarentApi.Payment.Application.Internal.CommandServices;
+using RuedarentApi.Payment.Application.Internal.QueryServices;
+using RuedarentApi.Payment.Domain.Repositories;
+using RuedarentApi.Payment.Domain.Services;
+using RuedarentApi.Payment.Infrastructure.Repositories;
+using RuedarentApi.Payment.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,10 +37,10 @@ builder.Services.AddControllers(options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-//Add DataBase Connection
+// Add DataBase Connection
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
-//Configure Databasse context and loggin levels
+// Configure Database context and logging levels
 builder.Services.AddDbContext<AppDbContext>(
     options =>
     {
@@ -51,31 +57,54 @@ builder.Services.AddDbContext<AppDbContext>(
                     .EnableDetailedErrors();
     });
 
-//Configure LowerCase Urls
+// Register PaymentDbContext
+builder.Services.AddDbContext<PaymentDbContext>(
+    options =>
+    {
+        if (connectionString != null)
+            if (builder.Environment.IsDevelopment())
+                options.UseMySQL(connectionString)
+                    .LogTo(Console.WriteLine, LogLevel.Information)
+                    .EnableSensitiveDataLogging()
+                    .EnableDetailedErrors();
+            else if (builder.Environment.IsProduction())
+                options.UseMySQL(connectionString)
+                    .LogTo(Console.WriteLine, LogLevel.Error)
+                    .EnableSensitiveDataLogging()
+                    .EnableDetailedErrors();
+    });
+
+// Configure LowerCase Urls
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
 builder.Services.AddControllers(options =>
 {
     options.Conventions.Add(new KebabCaseRouteNamingConvention());
 });
 
+// Register common services
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IVehicleSourceRepository, VehicleSourceRepository>();
 builder.Services.AddScoped<IVehicleSourceCommandService, VehicleSourceCommandService>();
 builder.Services.AddScoped<IVehicleSourceQueryService, VehicleSourceQueryService>();
-//USER
+
+// Register user services
 builder.Services.AddScoped<IUserSourceRepository, UserSourceRepository>();
 builder.Services.AddScoped<IUserSourceCommandService, UserSourceCommandService>();
 builder.Services.AddScoped<IUserSourceQueryService, UserSourceQueryService>();
 
-//Order
+// Register order services
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddScoped<IOrderCommandService, OrderCommandService>();
 builder.Services.AddScoped<IOrderQueryService, OrderQueryService>();
 
-//agregar cada entidad y arquetipo
+// Register payment services and repositories
+builder.Services.AddScoped<IPaymentCommandService, PaymentCommandService>();
+builder.Services.AddScoped<IPaymentQueryService, PaymentQueryService>();
+builder.Services.AddScoped<IPaymentRepository, PaymentRepository>();
 
 var app = builder.Build();
-//Verify DataBase object are created
+
+// Verify Database objects are created
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
@@ -90,13 +119,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-
-
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
 app.MapControllers();
 
-
 app.Run();
-
