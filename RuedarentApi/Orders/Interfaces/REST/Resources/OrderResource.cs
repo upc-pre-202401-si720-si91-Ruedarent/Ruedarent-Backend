@@ -3,7 +3,7 @@
 public record OrderResource(
     int Id,
     string OwnerName,
-    string SelectedPlan,
+    int PlanId,
     double Discount,
     double Subtotal,
     double Total);

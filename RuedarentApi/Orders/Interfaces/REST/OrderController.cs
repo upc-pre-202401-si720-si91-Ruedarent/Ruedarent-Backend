@@ -5,20 +5,26 @@ using RuedarentApi.Orders.Domain.Repositories;
 using RuedarentApi.Orders.Domain.Services;
 using RuedarentApi.Orders.Interfaces.REST.Resources;
 using RuedarentApi.Orders.Interfaces.REST.Transform;
+using RuedarentApi.Plans.Domain.Repositories;
 
 namespace RuedarentApi.Orders.Interfaces.REST;
 
 [ApiController]
 [Route("api/v1/[controller]")]
 [Produces(MediaTypeNames.Application.Json)]
-public class OrderController(IOrderRepository orderRepository,IOrderCommandService orderCommandService, IOrderQueryService orderQueryService) : ControllerBase
+public class OrderController(IOrderRepository orderRepository,IOrderCommandService orderCommandService, IOrderQueryService orderQueryService, IPlanRepository planRepository) : ControllerBase
 {
     [HttpPost]
         public async Task<ActionResult> CreateOrder([FromBody] CreateOrderResource resource)
         {
             var createOrderCommand =
                 CreateOrderCommandFromResourceAssembler.ToCommandFromResource(resource);
-            var result = await orderCommandService.Handle(createOrderCommand);
+            var plan = await planRepository.FindByIdAsync(createOrderCommand.PlanId);
+            if (plan == null)
+            {
+                return BadRequest("Plan not found");
+            }
+            var result = await orderCommandService.Handle(createOrderCommand,plan);
             return CreatedAtAction(nameof(GetOrderById), new { id = result.Id },
                 OrderResourceFromEntityAssembler.ToResourceFromEntity(result));
         }

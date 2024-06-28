@@ -16,4 +16,9 @@
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0"/>
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Plans\Application\Internal\CommandServices\" />
+      <Folder Include="Plans\Domain\Model\Commands\" />
+    </ItemGroup>
+
 </Project>

@@ -4,6 +4,10 @@ using RuedarentApi.Orders.Application.Internal.QueryServices;
 using RuedarentApi.Orders.Domain.Repositories;
 using RuedarentApi.Orders.Domain.Services;
 using RuedarentApi.Orders.Infraestructure.Repositories;
+using RuedarentApi.Plans.Application.Internal.QueryServices;
+using RuedarentApi.Plans.Domain.Repositories;
+using RuedarentApi.Plans.Domain.Services;
+using RuedarentApi.Plans.Infraestructure.Repositories;
 using RuedarentApi.Shared.Domain.Repositories;
 using RuedarentApi.Shared.Infraestructure.Interfaces.ASP.Configuratin;
 using RuedarentApi.Shared.Infraestructure.Persistences.EFC.Configuration;
@@ -71,6 +75,11 @@ builder.Services.AddScoped<IUserSourceQueryService, UserSourceQueryService>();
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddScoped<IOrderCommandService, OrderCommandService>();
 builder.Services.AddScoped<IOrderQueryService, OrderQueryService>();
+
+//Plan
+builder.Services.AddScoped<IPlanRepository, PlanRepository>();
+builder.Services.AddScoped<IPlanQueryService, PlanQueryService>();
+
 
 //agregar cada entidad y arquetipo
 

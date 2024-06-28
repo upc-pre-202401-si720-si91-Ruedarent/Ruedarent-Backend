@@ -7,5 +7,5 @@ public static class CreateOrderCommandFromResourceAssembler
 {
     public static CreateOrderCommand
         ToCommandFromResource(CreateOrderResource resource) =>
-        new CreateOrderCommand(resource.OwnerName, resource.SelectedPlan,resource.Discount,resource.Subtotal,resource.Total);
+        new CreateOrderCommand(resource.OwnerName, resource.PlanId,resource.Discount,resource.Subtotal,resource.Total);
 }

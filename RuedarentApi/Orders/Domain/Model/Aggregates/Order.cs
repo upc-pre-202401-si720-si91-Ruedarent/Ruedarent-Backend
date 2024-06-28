@@ -1,4 +1,5 @@
 ﻿using RuedarentApi.Orders.Domain.Model.Commands;
+using RuedarentApi.Plans.Domain.Model.Aggregates;
 
 namespace RuedarentApi.Orders.Domain.Model.Aggregates;
 
@@ -12,7 +13,8 @@ public class Order
 {
     public int Id { get; private set; }
     public string OwnerName { get; private set; }
-    public string SelectedPlan { get; private set; }
+    public int PlanId { get; internal set; }
+    public Plan Plan { get; private set; }
     public double Discount { get; private set; }
     public double Subtotal { get; private set; }
     public double Total { get; private set; }
@@ -20,7 +22,6 @@ public class Order
     protected Order()
     {
         this.OwnerName = string.Empty;
-        this.SelectedPlan = string.Empty;
         this.Discount = 0;
         this.Subtotal = 0;
         this.Total = 0;
@@ -33,12 +34,13 @@ public class Order
     /// the constructor is the command handler for the CreateOrderCommand
     /// </remarks>
     /// <param name="command">the CreateOrderCommand command</param>
-    public Order(CreateOrderCommand command)
+    public Order(CreateOrderCommand command, Plan plan)
     {
         this.OwnerName = command.OwnerName;
-        this.SelectedPlan = command.SelectedPlan;
+        this.Plan = plan;
+        this.PlanId = plan.PlanId;
         this.Discount = command.Discount;
-        this.Subtotal = command.Subtotal;
+        this.Subtotal = plan.Price;
         if (this.Subtotal == 0)
         {
             this.Discount = 0;

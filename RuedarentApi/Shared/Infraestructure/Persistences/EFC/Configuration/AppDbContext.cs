@@ -1,6 +1,7 @@
 ﻿using EntityFrameworkCore.CreatedUpdatedDate.Extensions;
 using Microsoft.EntityFrameworkCore;
 using RuedarentApi.Orders.Domain.Model.Aggregates;
+using RuedarentApi.Plans.Domain.Model.Aggregates;
 using RuedarentApi.Shared.Infraestructure.Persistences.EFC.Configuration.Extensions;
 using RuedarentApi.UserProfile.Domain.Model.Aggregates;
 using RuedarentApi.Vehicle.Domain.Model.Aggregates;
@@ -19,6 +20,8 @@ public class AppDbContext : DbContext
         builder.AddCreatedUpdatedInterceptor();
         base.OnConfiguring(builder);
     }
+    
+    public DbSet<Plan> Plans { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -52,13 +55,29 @@ public class AppDbContext : DbContext
         builder.Entity<Order>().HasKey(o => o.Id);
         builder.Entity<Order>().Property(o => o.Id).IsRequired().ValueGeneratedOnAdd();
         builder.Entity<Order>().Property(o => o.OwnerName).IsRequired().HasMaxLength(30);
-        builder.Entity<Order>().Property(o => o.SelectedPlan).IsRequired().HasMaxLength(10);
         builder.Entity<Order>().Property(o => o.Discount).HasDefaultValue(0);
-        builder.Entity<Order>().Property(o => o.Subtotal).IsRequired().HasDefaultValue(0);
+        //builder.Entity<Order>().Property(o => o.Subtotal).IsRequired().HasDefaultValue(0);
         builder.Entity<Order>().Property(o => o.Total).IsRequired().HasComputedColumnSql("(`Subtotal` - `Discount`)");
         builder.UseSnakeCaseNamingConvention();
         
+        //Plan
+        builder.Entity<Plan>().ToTable("Plans");
+        builder.Entity<Plan>().HasKey(p => p.PlanId);
+        builder.Entity<Plan>().Property(p => p.PlanId).IsRequired();
+        builder.Entity<Plan>().Property(p => p.Name).IsRequired().HasMaxLength(50);
+        builder.Entity<Plan>().Property(p => p.Description).IsRequired();
+        builder.Entity<Plan>().Property(p => p.Price).IsRequired();
+        builder.Entity<Plan>().HasData(
+            new Plan(1, "Plan Gratuito", "S/. 0 por 1 mes", 0),
+            new Plan(2, "Plan Standard", "S/. 10 por 1 mes", 10),
+            new Plan(3, "Plan Entusiasta", "S/. 21 por 1 mes", 21)
+        );
         
+        builder.Entity<Plan>().HasMany(p => p.Orders)
+            .WithOne(o => o.Plan)
+            .HasForeignKey(o => o.PlanId)
+            .HasPrincipalKey(o => o.PlanId)
+            .HasConstraintName("FK_Order_Plan");
 
         builder.UseSnakeCaseNamingConvention();
     }
