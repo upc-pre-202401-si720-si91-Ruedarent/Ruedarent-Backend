@@ -1,6 +1,0 @@
-@RuedarentApi_HostAddress = http://localhost:5131
-
-GET {{RuedarentApi_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###

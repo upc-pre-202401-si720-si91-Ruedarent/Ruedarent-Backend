@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuedaRent-Platform", "RuedaRent-Platform\RuedaRent-Platform.csproj", "{119DD3D0-D852-4CBE-8F05-3BC36D6670F4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{119DD3D0-D852-4CBE-8F05-3BC36D6670F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{119DD3D0-D852-4CBE-8F05-3BC36D6670F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{119DD3D0-D852-4CBE-8F05-3BC36D6670F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{119DD3D0-D852-4CBE-8F05-3BC36D6670F4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

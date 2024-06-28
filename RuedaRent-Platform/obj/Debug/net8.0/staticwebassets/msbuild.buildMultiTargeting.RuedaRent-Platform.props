@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\RuedaRent-Platform.props" />
+</Project>

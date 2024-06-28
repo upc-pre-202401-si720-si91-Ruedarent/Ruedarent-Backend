@@ -1,0 +1,3 @@
+﻿namespace ACME.LearningCenter_Platform.VehiclesInformation.Domain.Model.Queries;
+
+public record GetAllVehiclesByCategoryIdQuery(int CategoryId);
